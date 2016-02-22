@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+  <style>
+body { /* define global style and background */
+  font-family: Helvetica neue, sans-serif;
+  background-color:green;
+}
+#score { /* big, bold, blue, upper right */
+  font-weight:bold;
+  font-size:400%;
+  color:blue;
+  position:absolute;
+  top:.1em;
+  right:1em;
+}
+#start { /* normal button, lower right */
+  position:absolute;
+  bottom:1em;
+  right:1em;
+}
+#mole { /* brown square with no positioning */
+  height:75px;
+  width:75px;
+  position:absolute;
+  background-color:brown;
+}
+#gameOver { /* big centered text */
+  position:absolute;
+  margin:auto;
+  width:95%;
+  text-align:center;
+  top:50%;
+  font-size:200%;
+}
+  </style>
+</head>
+<body>
+  <p id="score">0</p>
+  <button id="start">Start</button>
+  <button id="mole">Mole</button>
+  <p id="gameOver">Game Over</p>
+</body>
+</html>

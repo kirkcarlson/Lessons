@@ -1,0 +1,656 @@
+---Lesson 1--Basic HTML
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+</head>
+<body>
+</body>
+</html>
+---Lesson 2--Basic HTML with the Mole elements
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+</head>
+<body>
+  <p>0</p>
+  <button>Start</button>
+  <button>Mole</button>
+  <p>Game Over</p>
+</body>
+</html>
+---Lesson 3--Basic HTML with the Mole elements and a bit of CSS style
+- elements include a unique id
+- id is used in CSS to apply attributes
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+  <style>
+body { /* define global style and background */
+  font-family: Helvetica neue, sans-serif;
+  background-color:green;
+}
+#score { /* big, bold, blue, upper right */
+  font-weight:bold;
+  font-size:400%;
+  color:blue;
+  position:absolute;
+  top:.1em;
+  right:1em;
+}
+#start { /* normal button, lower right */
+  position:absolute;
+  bottom:1em;
+  right:1em;
+}
+#mole { /* brown square with no positioning */
+  height:75px;
+  width:75px;
+  position:absolute;
+  background-color:brown;
+}
+#gameOver { /* big centered text */
+  position:absolute;
+  margin:auto;
+  width:95%;
+  text-align:center;
+  top:50%;
+  font-size:200%;
+}
+  </style>
+</head>
+<body>
+  <p id="score">0</p>
+  <button id="start">Start</button>
+  <button id="mole">Mole</button>
+  <p id="gameOver">Game Over</p>
+</body>
+</html>
+---Lesson 4--More style
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+  <style>
+body { /* define global style and background */
+  font-family: Helvetica neue, sans-serif;
+  background-color:green;
+}
+#score { /* big, bold, blue, upper right */
+  margin:0;
+  font-weight:bold;
+  font-size:400%;
+  color:blue;
+  text-align:right;
+  position:absolute;
+  top:.1em;
+  right:.3em;
+} 
+#start { /* normal button, lower right */
+  font-weight:bold;
+  font-size:100%;
+  position:absolute;
+  bottom:1em;
+  right:1em;
+}
+#mole { /* brown square with no positioning */
+  font-weight:bold;
+  font-size:150%;
+  height:75px;
+  width:75px;
+  position:absolute;
+  background-color:brown;
+  border:none; /* get rid of border */
+}
+#gameOver { /* big centered text */
+  position:absolute;
+  margin:auto;
+  width:95%;
+  text-align:center;
+  top:50%;
+  font-size:200%;
+}
+.noselect { /* make it so text elements can't be selected */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+  </style>
+</head>
+<body>
+  <p id="score" class="noselect">0</p>
+  <button id="start">Start</button>
+  <button id="mole">Mole</button>
+  <p id="gameOver" class="noselect">Game Over</p>
+</body>
+</html>
+---Lesson 5--Javascript to increment the score
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+  <style>
+body { /* define global style and background */
+  font-family: Helvetica neue, sans-serif;
+  background-color:green;
+}
+#score { /* big, bold, blue, upper right */
+  margin:0;
+  font-weight:bold;
+  font-size:400%;
+  color:blue;
+  text-align:right;
+  position:absolute;
+  top:.1em;
+  right:.3em;
+} 
+#start { /* normal button, lower right */
+  font-weight:bold;
+  font-size:100%;
+  position:absolute;
+  bottom:1em;
+  right:1em;
+}
+#mole { /* brown square with no positioning */
+  font-weight:bold;
+  font-size:150%;
+  height:75px;
+  width:75px;
+  position:absolute;
+  background-color:brown;
+  border:none; /* get rid of border */
+  display:block;
+}
+#gameOver { /* big centered text */
+  position:absolute;
+  margin:auto;
+  width:95%;
+  text-align:center;
+  top:50%;
+  font-size:200%;
+  display:none; /* don't display at first */
+}
+.noselect { /* make it so text elements can't be selected */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+  </style>
+</head>
+<body>
+  <p id="score" class="noselect">0</p>
+  <button id="start">Start</button>
+  <button id="mole">Mole</button>
+  <p id="gameOver" class="noselect">Game Over</p>
+</body>
+<script>
+//*** GLOBALS ***
+var score = 0;
+
+
+//*** INITIALIZATION ***
+
+document.getElementById( "mole").onclick = molePressed;
+
+
+//*** FUNCTIONS ***
+
+function molePressed () {
+  score = score + 1;
+  document.getElementById( "score").innerHTML = score;
+}
+</script>
+</html>
+---Lesson 6--Javascript to reset the score
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+  <style>
+body { /* define global style and background */
+  font-family: Helvetica neue, sans-serif;
+  background-color:green;
+}
+#score { /* big, bold, blue, upper right */
+  margin:0;
+  font-weight:bold;
+  font-size:400%;
+  color:blue;
+  text-align:right;
+  position:absolute;
+  top:.1em;
+  right:.3em;
+} 
+#start { /* normal button, lower right */
+  font-weight:bold;
+  font-size:100%;
+  position:absolute;
+  bottom:1em;
+  right:1em;
+}
+#mole { /* brown square with no positioning */
+  font-weight:bold;
+  font-size:150%;
+  height:75px;
+  width:75px;
+  position:absolute;
+  background-color:brown;
+  border:none; /* get rid of border */
+}
+#gameOver { /* big centered text */
+  position:absolute;
+  margin:auto;
+  width:95%;
+  text-align:center;
+  top:50%;
+  font-size:200%;
+  display:none; /* don't display at first */
+}
+.noselect { /* make it so text elements can't be selected */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+  </style>
+</head>
+<body>
+  <p id="score" class="noselect">0</p>
+  <button id="start">Start</button>
+  <button id="mole">Mole</button>
+  <p id="gameOver" class="noselect">Game Over</p>
+</body>
+<script>
+
+
+//***GLOBALS ***
+
+var score = 0;
+
+
+//*** INITIALIZATION ***
+
+document.getElementById( "start").onclick = startPressed;
+document.getElementById( "mole").onclick = molePressed;
+
+
+//*** FUNCTIONS ***
+
+function setScore (count) {
+  score = count;
+  document.getElementById( "score").innerHTML = score;
+}
+
+function startPressed () {
+  setScore (0);
+}
+
+function molePressed () {
+  setScore (score + 1);
+  moveMole();
+}
+</script>
+</html>
+---Lesson 7--Javascript moves the mole
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+  <style>
+body { /* define global style and background */
+  font-family: Helvetica neue, sans-serif;
+  background-color:green;
+}
+#score { /* big, bold, blue, upper right */
+  margin:0;
+  font-weight:bold;
+  font-size:400%;
+  color:blue;
+  text-align:right;
+  position:absolute;
+  top:.1em;
+  right:.3em;
+}
+#start { /* normal button, lower right */
+  font-weight:bold;
+  font-size:100%;
+  position:absolute;
+  bottom:1em;
+  right:1em;
+}
+#mole { /* brown square with no positioning */
+  font-weight:bold;
+  font-size:150%;
+  height:75px;
+  width:75px;
+  position:absolute;
+  background-color:brown;
+  border:none; /* get rid of border */
+}
+#gameOver { /* big centered text */
+  position:absolute;
+  margin:auto;
+  width:95%;
+  text-align:center;
+  top:50%;
+  font-size:200%;
+  display:none; /* don't display at first */
+}
+.noselect { /* make it so text elements can't be selected */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+  </style>
+</head>
+<body>
+  <p id="score" class="noselect">0</p>
+  <button id="start">Start</button>
+  <button id="mole">Mole</button>
+  <p id="gameOver" class="noselect">Game Over</p>
+</body>
+<script>
+
+
+//***GLOBALS ***
+
+var score = 0;
+
+
+//*** INITIALIZATION ***
+
+document.getElementById( "start").onclick = startPressed;
+document.getElementById( "mole").onclick = molePressed;
+
+
+//*** FUNCTIONS ***
+
+function setScore (count) {
+  score = count;
+  document.getElementById( "score").innerHTML = score;
+}
+
+function startPressed () {
+  setScore (0);
+}
+
+function moveMole () {
+  var width = window.innerWidth - 75; // decrease by mole size
+  var height = window.innerHeight - 75; // decrease by mole size
+  document.getElementById("mole").style.top = height * Math.random() + "px";
+  document.getElementById("mole").style.left = width * Math.random() + "px";
+  moleTime = Date.now() + moleDuration;
+}
+
+function molePressed () {
+  setScore (score + 1);
+  moveMole();
+}
+</script>
+</html>
+---Lesson 8--Javascript moves the mole all the time
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+  <style>
+body { /* define global style and background */
+  font-family: Helvetica neue, sans-serif;
+  background-color:green;
+}
+#score { /* big, bold, blue, upper right */
+  font-weight:bold;
+  font-size:400%;
+  color:blue;
+  text-align:right;
+  position:absolute;
+  top:.1em;
+  right:.3em;
+}
+#start { /* normal button, lower right */
+  margin:0;
+  font-weight:bold;
+  font-size:100%;
+  position:absolute;
+  bottom:1em;
+  right:1em;
+}
+#mole { /* brown square with no positioning */
+  font-weight:bold;
+  font-size:150%;
+  height:75px;
+  width:75px;
+  position:absolute;
+  background-color:brown;
+  border:none; /* get rid of border */
+}
+#gameOver { /* big centered text */
+  position:absolute;
+  margin:auto;
+  width:95%;
+  text-align:center;
+  top:50%;
+  font-size:200%;
+  display:none; /* don't display at first */
+}
+.noselect { /* make it so text elements can't be selected */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+  </style>
+</head>
+<body>
+  <p id="score" class="noselect">0</p>
+  <button id="start">Start</button>
+  <button id="mole">Mole</button>
+  <p id="gameOver" class="noselect">Game Over</p>
+</body>
+<script>
+
+
+//***GLOBALS ***
+
+var score = 0;
+var moleTime = 0;
+var moleDuration = 0800; // .8 second
+
+
+//*** INITIALIZATION ***
+
+document.getElementById( "start").onclick = startPressed;
+document.getElementById( "mole").onclick = molePressed;
+
+
+//*** FUNCTIONS ***
+
+function setScore (count) {
+  score = count;
+  document.getElementById( "score").innerHTML = score;
+}
+
+function startPressed () {
+  setScore (0);
+  moleTime = Date.now();
+  gameLoop();
+}
+
+function gameLoop () {
+  if (Date.now() >= moleTime) {
+    moveMole();
+  }
+  setTimeout(gameLoop, 300);
+}
+
+function moveMole () {
+  var width = window.innerWidth - 75; // decrease by mole size
+  var height = window.innerHeight - 75; // decrease by mole size
+  document.getElementById("mole").style.top = height * Math.random() + "px";
+  document.getElementById("mole").style.left = width * Math.random() + "px";
+  moleTime = Date.now() + moleDuration;
+}
+
+function molePressed () {
+  setScore (score + 1);
+  moveMole();
+}
+</script>
+</html>
+---Lesson 9--Javascript end the game
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+  <style>
+body { /* define global style and background */
+  font-family: Helvetica neue, sans-serif;
+  background-color:green;
+}
+#score { /* big, bold, blue, upper right */
+  margin:0;
+  font-weight:bold;
+  font-size:400%;
+  color:blue;
+  text-align:right;
+  position:absolute;
+  top:.1em;
+  right:.3em;
+}
+#start { /* normal button, lower right */
+  font-weight:bold;
+  font-size:100%;
+  position:absolute;
+  bottom:1em;
+  right:1em;
+}
+#mole { /* brown square with no positioning */
+  font-weight:bold;
+  font-size:150%;
+  height:75px;
+  width:75px;
+  position:absolute;
+  background-color:brown;
+  border:none; /* get rid of border */
+  display:none; /* don't display at first */
+}
+#gameOver { /* big centered text */
+  position:absolute;
+  margin:auto;
+  width:95%;
+  text-align:center;
+  top:50%;
+  font-size:200%;
+  display:none; /* don't display at first */
+}
+.noselect { /* make it so text elements can't be selected */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+  </style>
+</head>
+<body>
+  <p id="score" class="noselect">0</p>
+  <button id="start">Start</button>
+  <button id="mole">Mole</button>
+  <p id="gameOver" class="noselect">Game Over</p>
+</body>
+<script>
+
+
+//***GLOBALS ***
+
+var score = 0;
+var gameTime = 0;
+var moleTime = 0;
+var gameDuration = 10000; // 10 seconds
+var moleDuration = 0800; // .8 second
+
+
+//*** INITIALIZATION ***
+
+document.getElementById( "start").onclick = startPressed;
+document.getElementById( "mole").onclick = molePressed;
+
+
+//*** FUNCTIONS ***
+
+function setScore (count) {
+  score = count;
+  document.getElementById( "score").innerHTML = score;
+}
+
+function startPressed () {
+  setScore (0);
+
+  var baseTime = Date.now()
+  gameTime = baseTime + gameDuration;
+  moleTime = baseTime;
+  document.getElementById("gameOver").style.display="none"
+  document.getElementById("start").style.display="none"
+  document.getElementById("mole").style.display="block"
+  gameLoop();
+}
+
+function gameLoop () {
+  var currentTime = Date.now()
+  if (currentTime >= moleTime) {
+    moveMole();
+  }
+  if (currentTime < gameTime) {
+    setTimeout(gameLoop, 300);
+  } else {
+    document.getElementById("gameOver").style.display="block"
+    document.getElementById("start").style.display="block"
+    document.getElementById("mole").style.display="none"
+  }
+}
+
+function moveMole () {
+  var width = window.innerWidth - 75; // decrease by mole size
+  var height = window.innerHeight - 75; // decrease by mole size
+  document.getElementById("mole").style.top = height * Math.random() + "px";
+  document.getElementById("mole").style.left = width * Math.random() + "px";
+  moleTime = Date.now() + moleDuration;
+}
+
+function molePressed () {
+  setScore (score + 1);
+  moveMole();
+}
+</script>
+</html>

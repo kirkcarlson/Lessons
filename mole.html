@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mole Wack</title>
+  <style>
+body { /* define global style and background */
+  font-family: Helvetica neue, sans-serif;
+  background-color:green;
+}
+p {
+  margin:0;
+}
+#score { /* big, bold, blue, upper right */
+  font-weight:bold;
+  font-size:400%;
+  color:blue;
+  text-align:right;
+  position:absolute;
+  top:.1em;
+  right:.3em;
+}
+#start { /* normal button, lower right */
+  font-weight:bold;
+  font-size:100%;
+  position:absolute;
+  bottom:1em;
+  right:1em;
+}
+#mole { /* brown square with no positioning */
+  font-weight:bold;
+  font-size:150%;
+  height:75px;
+  width:75px;
+  position:absolute;
+  background-color:brown;
+  border:none; /* get rid of border */
+  display:none; /* don't display at first */
+}
+#gameOver { /* big centered text */
+  position:absolute;
+  margin:auto;
+  width:95%;
+  text-align:center;
+  top:50%;
+  font-size:200%;
+  display:none; /* don't display at first */
+}
+.noselect { /* make it so text elements can't be selected */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+  </style>
+</head>
+<body>
+  <p id="score" class="noselect">0</p>
+  <button id="start">Start</button>
+  <button id="mole">Mole</button>
+  <p id="gameOver" class="noselect">Game Over</p>
+</body>
+<script>
+
+
+//***GLOBALS ***
+
+var score = 0;
+var gameTime = 0;
+var moleTime = 0;
+var gameDuration = 10000; // 10 seconds
+var moleDuration = 0800; // .8 second
+
+
+//*** INITIALIZATION ***
+
+document.getElementById( "start").onclick = startPressed;
+document.getElementById( "mole").onclick = molePressed;
+
+
+//*** FUNCTIONS ***
+
+function setScore (count) {
+  score = count;
+  document.getElementById( "score").innerHTML = score;
+}
+
+function startPressed () {
+  setScore (0);
+
+  var baseTime = Date.now()
+  gameTime = baseTime + gameDuration;
+  moleTime = baseTime;
+  document.getElementById("gameOver").style.display="none"
+  document.getElementById("start").style.display="none"
+  document.getElementById("mole").style.display="block"
+  gameLoop();
+}
+
+function gameLoop () {
+  var currentTime = Date.now()
+  if (currentTime >= moleTime) {
+    moveMole();
+  }
+  if (currentTime < gameTime) {
+    setTimeout(gameLoop, 300);
+  } else {
+    document.getElementById("gameOver").style.display="block"
+    document.getElementById("start").style.display="block"
+    document.getElementById("mole").style.display="none"
+  }
+}
+
+function moveMole () {
+  var currentTime = Date.now()
+  var width = window.innerWidth - 75; // decrease by mole size
+  var height = window.innerHeight - 75; // decrease by mole size
+  var mole = document.getElementById("mole");
+  mole.style.top = height * Math.random() + "px";
+  mole.style.left = width * Math.random() + "px";
+  moleTime = currentTime + moleDuration;
+}
+
+function molePressed () {
+  setScore (score + 1);
+  moveMole();
+}
+</script>
+</html>
